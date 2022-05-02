@@ -161,7 +161,7 @@ public class PurchaseController {
 											 @RequestParam int tranNo,
 											 Map<String,Object> map,
 											 @RequestParam(defaultValue = "") String menu)throws Exception{
-		System.out.println("updateTranCode");
+		System.out.println("updateTranCode menu = "+menu);
 		map.put("tranNo", tranNo);
 		map.put("tranCode", tranCode);
 		purchaseServiceImpl.updateTranCode(map);
@@ -187,9 +187,6 @@ public class PurchaseController {
 		search.setPageSize(pageSize);
 		
 		// Business logic ผ๖วเ
-		User user = (User)session.getAttribute("user");
-		System.out.println("listPurchase userId"+user.getUserId());
-		map.put("user",user);
 		map.put("search", search);
 		resultMap = purchaseServiceImpl.requsetPuerchaseList(map);
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);

@@ -38,4 +38,10 @@ public class BasketServiceImpl implements BasketService {
 		basketDao.deleteBasket(basketNo);
 	}
 
+	@Override
+	public String getBasket(Map map) throws Exception {
+		
+		return basketDao.getBasket(map);
+	}
+
 }

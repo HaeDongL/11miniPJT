@@ -48,4 +48,10 @@ public class BasketDaoImpl implements BasketDao {
 		
 	}
 
+	@Override
+	public String getBasket(Map map) throws Exception {
+		String basketProduct = sqlSession.selectOne("BasketMapper.getBasket",map);
+		return basketProduct;
+	}
+
 }

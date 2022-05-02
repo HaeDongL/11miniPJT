@@ -53,7 +53,7 @@ public class ProductController {
 	public String addProductAction(@ModelAttribute("product") Product product,
 									MultipartHttpServletRequest mtfRequest)throws Exception{
 		////////////////FileUpload 구간////////////////////////////////////////
-		String path = "C:\\Users\\bitcamp\\git\\miniPJT07\\07.Model2MVCShop(URI,pattern)\\src\\main\\webapp\\images\\uploadFiles\\";
+		String path = "C:\\Users\\bitcamp\\git\\11miniPJT\\11.Model2MVCShop\\src\\main\\webapp\\images\\uploadFiles\\";
 		// => 절대경로이고 여기서 부터 상대경로로 표현... 해도 위치가 바끼면 결국 사용자이름까지 찾아와서 변경해야하는건 같음.
 		MultipartFile mf = mtfRequest.getFile("file");//=> 읽어드릴 파일이 있는 input의 name
 		// 이 부분을 getParameter같은걸로 읽어서 바인딩하면 String타입으로 파일 이름만 들어옴.
@@ -94,7 +94,7 @@ public class ProductController {
 	
 	@RequestMapping("listProduct")
 	public String listProductAction( @ModelAttribute Search search , Model model , HttpServletRequest request,
-							@RequestParam String menu) throws Exception{
+							@RequestParam(defaultValue="search") String menu) throws Exception{
 		
 		System.out.println("listProduct");
 		
@@ -150,7 +150,7 @@ public class ProductController {
 		
 		
 		////////////////FileUpload 구간////////////////////////////////////////
-		String path = "C:\\Users\\bitcamp\\git\\miniPJT07\\07.Model2MVCShop(URI,pattern)\\src\\main\\webapp\\images\\uploadFiles\\";
+		String path = "C:\\Users\\bitcamp\\git\\11miniPJT\\11.Model2MVCShop\\src\\main\\webapp\\images\\uploadFiles\\";
 		// => 절대경로이고 여기서 부터 상대경로로 표현... 해도 위치가 바끼면 결국 사용자이름까지 찾아와서 변경해야하는건 같음.
 		MultipartFile mf = mtfRequest.getFile("file");//=> 읽어드릴 파일이 있는 input의 name
 		// 이 부분을 getParameter같은걸로 읽어서 바인딩하면 String타입으로 파일 이름만 들어옴.

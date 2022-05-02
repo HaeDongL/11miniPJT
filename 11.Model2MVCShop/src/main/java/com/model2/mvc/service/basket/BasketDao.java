@@ -12,4 +12,5 @@ public interface BasketDao {
 	
 	public void deleteBasket(String basketNo)throws Exception;
 	
+	public String getBasket(Map map)throws Exception;
 }

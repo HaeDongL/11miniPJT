@@ -64,6 +64,11 @@ function fncAddProduct(){
 }
 
 </script>
+	<style>
+        body {
+            padding-top : 70px;
+        }
+   	</style>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">

@@ -60,4 +60,15 @@
 		delete basket
 		WHERE basket_no = #{value}
 	</delete>
+	
+	<select id="getBasket" parameterType="java.util.HashMap" resultType="string">
+		SELECT
+		p.prod_name
+		FROM
+		basket b, product p
+		WHERE b.prod_no = p.prod_no
+		AND b.user_id = #{user.userId}
+		AND b.prod_no = #{prodNo}
+	
+	</select>
 </mapper>

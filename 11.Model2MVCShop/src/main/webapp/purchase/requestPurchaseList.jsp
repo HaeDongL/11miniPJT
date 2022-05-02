@@ -15,21 +15,39 @@ Search search = (Search)request.getAttribute("search");
 %>
 <html>
 <head>
-<title>구매요청페이지</title>
-
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
+<title>구매요청조회</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!--   jQuery , Bootstrap CDN  -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<!-- Bootstrap Dropdown Hover CSS -->
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 <script type="text/javascript">
 	function fncGetList(currentPage) {
 		document.getElementById("currentPage").value = currentPage;
 	   	document.detailForm.submit();		
 	}
 </script>
+
+	<style>
+        body {
+            padding-top : 70px;
+        }
+   	</style>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
 
 <div style="width: 98%; margin-left: 10px;">
-
+<jsp:include page="/layout/toolbar.jsp" />
 <form name="detailForm" action="/purchase/requestPurchaseList" method="post">
 <input type="hidden" name="menu" value="manage" />
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
@@ -104,7 +122,7 @@ Search search = (Search)request.getAttribute("search");
 			<c:if test="${purchase.tranCode == 3}">
 			<td align="left">배송완료</td> 
 		</c:if>
-		</td>
+		
 		<td></td>
 		<td align="left">
 			

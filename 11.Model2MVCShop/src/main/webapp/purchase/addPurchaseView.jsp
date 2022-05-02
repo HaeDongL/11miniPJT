@@ -17,12 +17,27 @@
 <html>
 <head>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
-<script src="../javascript/jquery-2.1.4.js" type="text/javascript"></script>
 
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!--   jQuery , Bootstrap CDN  -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<!-- Bootstrap Dropdown Hover CSS -->
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 <title>Insert title here</title>
-
+	<style>
+        body {
+            padding-top : 70px;
+        }
+   	</style>
 <script type="text/javascript" src="../javascript/calendar.js">
 </script>
 
@@ -36,7 +51,7 @@ function fncAddPurchase() {
 </head>
 
 <body>
-
+<jsp:include page="/layout/toolbar.jsp" />
 <form name="addPurchase" method="post" action="/purchase/addPurchase">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">

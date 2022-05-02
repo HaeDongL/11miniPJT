@@ -82,7 +82,12 @@
 	                         <li><a href="#">etc..</a></li>
 	                     </ul>
 	                 </li>
-	                 
+	                 <c:if test="${user.role == 'admin' }" >
+	                	 <li><a href="#">구매요청조회</a></li>
+	                 </c:if>
+	                 <c:if test="${user.role == 'user' }" >
+	                	 <li><a href="#">장바구니조회</a></li>
+	                 </c:if>
 	                 <li><a href="#">etc...</a></li>
 	             </ul>
 	             
@@ -116,25 +121,57 @@
 				//$(self.location).attr("href","/user/logout");
 				self.location = "/user/listUser"
 			}); 
+			
+		 	//=============  개인정보조회회 Event  처리 =============	
+		 	$( "a:contains('개인정보조회')" ).on("click" , function() {
+		 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+				$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
+			});
+			
+		 
+		 	
+			//////////////////상품 관리 //////////////////////////////
+		 
+		 	$("a:contains('판매상품등록')").on("click", function(){
+				$(self.location).attr("href","/product/addProduct");
+			});
+			
+			
+			$("a:contains('판매상품관리')").on("click", function(){
+				$(self.location).attr("href","/product/listProduct?menu=manage");
+			});
+		 	
+			
+			$("a:contains('상 품 검 색')").on("click", function(){
+				$(self.location).attr("href","/product/listProduct");
+			});
+			
+		 	//////////////////상품 관리 //////////////////////////////
+		 	
+		 	//////////////////구매 관리 /////////////////////////////
+		 	
+		 	$("a:contains('구매이력조회')").on("click",function(){
+		 		$(self.location).attr("href","/purchase/listPurchase");
+		 	}); 	
+		 	
+		 	$("a:contains('구매요청조회')").on("click",function(){
+		 		$(self.location).attr("href","/purchase/requestPurchaseList?menu=${menu}");
+		 	});
+		 	
+		 	/////////////////장바구니////////////////////////////////
+		 	
+		 	$("a:contains('장바구니조회')").on("click",function(){
+		 		$(self.location).attr("href","/basket/listBasket");
+		 	});
 		 });
 		
-		//=============  개인정보조회회 Event  처리 =============	
-	 	$( "a:contains('개인정보조회')" ).on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
-		});
 		
-		//////////////////상품 관리 //////////////////////////////
+	 	
 		
-		$("a:contains('판매상품등록')").on("click", function(){
-			$(self.location).attr("href","/product/addProduct");
-		});
+	
 		
 		
-		$("a:contains('판매상품관리')").on("click", function(){
-			$(self.location).attr("href","/product/listProduct?menu=manage");
-		});
 		
 		
-		//////////////////상품 관리 //////////////////////////////
+		
 	</script>  

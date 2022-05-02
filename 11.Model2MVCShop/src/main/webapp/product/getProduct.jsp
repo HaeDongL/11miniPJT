@@ -32,6 +32,43 @@
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
 <title>Insert title here</title>
+
+	<style>
+        body {
+            padding-top : 70px;
+        }
+   	</style>
+   	
+   	<script type="text/javascript">
+   	$(function(){
+		$("td.ct_btn01:contains('장바구니에 담기')").on("click",function(){
+			
+			$.ajax({
+				url:"/basket/json/getBasket?prodNo=${product.prodNo}",
+				method:"GET",
+				headers:{
+					"Accept":"application/json",
+					"Content-Type":"application/json"
+				},
+				dateType:"json",
+				success:function(JSONData,status){
+					var basketProduct = JSONData.basketProduct;
+				}
+				
+			});
+			
+			if(basketProduct != null){
+				alert("${product.prodName}가(이) 이미 장바구니에 있습니다.");
+				return;
+			}
+			
+			alert("장바구니에 ${product.prodName}가(이) 담겼습니다.");
+   			$(self.location).attr("href","/basket/addBasket?prodNo=${product.prodNo }");
+   		});
+   	});
+   		
+   	
+   	</script>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
@@ -172,7 +209,8 @@
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01"	style="padding-top: 3px;">
-						<a href="/basket/addBasket?prodNo=${product.prodNo }">장바구니행</a><%-- from Action 잘볼것 --%>
+						<%-- <a href="/basket/addBasket?prodNo=${product.prodNo }">장바구니에 담기</a>--%>
+						<a href="#">장바구니에 담기</a>
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
@@ -184,7 +222,7 @@
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01"	style="padding-top: 3px;">
-						<a href="/product/updateProduct?prodNo=${product.prodNo }&menu=${menu}">수정</a><%-- from Action 잘볼것 --%>
+						<a href="/product/updateProduct?prodNo=${product.prodNo }&menu=${menu}">수정</a>
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>

@@ -11,5 +11,6 @@ public interface BasketService {
 	public Map<String,Object> listBasket(Map<String, Object> map)throws Exception;
 	
 	public void deleteBasket(String basketNo)throws Exception;
-
+	
+	public String getBasket(Map map)throws Exception;
 }
