@@ -46,24 +46,27 @@
 			$.ajax({
 				url:"/basket/json/getBasket?prodNo=${product.prodNo}",
 				method:"GET",
+				dataType:"json",
 				headers:{
 					"Accept":"application/json",
 					"Content-Type":"application/json"
 				},
-				dateType:"json",
 				success:function(JSONData,status){
 					var basketProduct = JSONData.basketProduct;
+					
+					
+					if(basketProduct != null){
+						alert("${product.prodName}가(이) 이미 장바구니에 있습니다.");
+					}else{
+						alert("장바구니에 ${product.prodName}가(이) 담겼습니다.");
+			   			$(self.location).attr("href","/basket/addBasket?prodNo=${product.prodNo }");
+					}
+					
+					
 				}
 				
 			});
 			
-			if(basketProduct != null){
-				alert("${product.prodName}가(이) 이미 장바구니에 있습니다.");
-				return;
-			}
-			
-			alert("장바구니에 ${product.prodName}가(이) 담겼습니다.");
-   			$(self.location).attr("href","/basket/addBasket?prodNo=${product.prodNo }");
    		});
    	});
    		

@@ -40,7 +40,7 @@ public class BasketServiceImpl implements BasketService {
 
 	@Override
 	public String getBasket(Map map) throws Exception {
-		
+		System.out.println("Service getBasket "+basketDao.getBasket(map));
 		return basketDao.getBasket(map);
 	}
 
