@@ -38,6 +38,7 @@
 			$("a[href='#' ]:contains('·Î ±× ÀÎ')").on("click" , function() {
 				self.location = "/user/login"
 			});
+			
 		});
 		
 	</script>	
@@ -48,7 +49,7 @@
 		
         <div class="container">
         
-        	<a class="navbar-brand" href="#">Model2 MVC Shop</a>
+        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
 			
 			<!-- toolBar Button Start //////////////////////// -->
 			<div class="navbar-header">

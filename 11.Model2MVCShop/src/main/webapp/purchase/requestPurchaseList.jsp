@@ -45,50 +45,33 @@ Search search = (Search)request.getAttribute("search");
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
-
-<div style="width: 98%; margin-left: 10px;">
 <jsp:include page="/layout/toolbar.jsp" />
+
 <form name="detailForm" action="/purchase/requestPurchaseList" method="post">
 <input type="hidden" name="menu" value="manage" />
-<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
-	<tr>
-		<td width="15" height="37"><img src="/images/ct_ttl_img01.gif"width="15" height="37"></td>
-		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left: 10px;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="93%" class="ct_ttl01">구매요청 목록</td>
-				</tr>
-			</table>
-		</td>
-		<td width="12" height="37"><img src="/images/ct_ttl_img03.gif"	width="12" height="37"></td>
-	</tr>
-</table>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top: 10px;">
-	<tr>
-		<td colspan="11">전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지</td>
-	</tr>
-	<tr>
-		<td class="ct_list_b" width="100">No</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">회원ID</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">회원명</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">전화번호</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">상품이름</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">구매개수</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">결재금액</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">배송현황</td>
-		<td class="ct_line02"></td>
-	</tr>
-	<tr>
-		<td colspan="11" bgcolor="808285" height="1"></td>
-	</tr>
+
+<div class="container">
+	
+	<div class="page-header text-info">
+	       <h3>구매요청 목록</h3>
+	    </div>
+	
+<table class="table table-striped">
+
+	<thead>
+		<tr>
+			<th>No</th>
+			<th>회원ID</th>
+			<th>회원명</th>
+			<th>전화번호</th>
+			<th>상품이름</th>
+			<th>구매개수</th>
+			<th>결재금액</th>
+			<th>배송현황</th>
+		</tr>
+	</thead>
+	
 	<c:set var="count" value="0"/>
 	<c:forEach var="purchase" items="${list}"><%--StartFor --%>
 	
@@ -97,21 +80,21 @@ Search search = (Search)request.getAttribute("search");
 		<c:set var="count" value="${count+1}"/>
 			<a href="/purchase/getPurchase?tranNo=${purchase.tranNo }">${count}</a>
 		</td>
-		<td></td>
+		
 		<td align="left">
 			<a href="/user/getUser?userId=${purchase.buyer.userId }">${purchase.buyer.userId }</a>
 		</td>
-		<td></td>
+		
 		<td align="left">${purchase.receiverName }</td>
-		<td></td>
+		
 		<td align="left">${purchase.receiverPhone }</td>
-		<td></td>
+		
 		<td align="left">${purchase.purchaseProd.prodName }</td>
-		<td></td>
+		
 		<td align="left">${purchase.buyQuantity }</td>
-		<td></td>
+		
 		<td align="left">${purchase.buyQuantity * purchase.purchaseProd.price }</td>
-		<td></td>
+		
 		
 		<c:if test="${purchase.tranCode == 1}">
 			<td align="left">구매완료&nbsp;<a href="/purchase/updateTranCode?tranNo=${purchase.tranNo }&menu=${menu}&tranCode=2">배송하기</a></td> 
@@ -123,54 +106,19 @@ Search search = (Search)request.getAttribute("search");
 			<td align="left">배송완료</td> 
 		</c:if>
 		
-		<td></td>
-		<td align="left">
+		
+		
 			
-		</td>
+		
 	</tr>
 	</c:forEach><%--end For --%>
-	
-	<%--<%for(int i=0; i<list.size(); i++) {
-	
-	<%Purchase purchase = list.get(i);%>
-	<tr class="ct_list_pop">
-		<td align="center">
-			<a href="/getPurchase.do?tranNo=<%=purchase.getTranNo()%>"><%=i %></a>
-		</td>
-		<td></td>
-		<td align="left">
-			<a href="/getUser.do?userId=user02"><%=purchase.getBuyer().getUserId() %></a>
-		</td>
-		<td></td>
-		<td align="left"><%=purchase.getReceiverName() %></td>
-		<td></td>
-		<td align="left"><%=purchase.getReceiverPhone() %></td>
-		<td></td>
-		
-		<td align="left">
-		
-		
-		<%if(purchase.getTranCode().equals("1")) {%>
-			현재 구입완료 상태 입니다.
-		<%}else if(purchase.getTranCode().equals("2")){ %>
-			현재 구입완료 상태 입니다.<a href="/updateTranCode.do?prodNo=<%=purchase.getPurchaseProd().getProdNo()%>&tranCode=3">물건도착</a>
-		<%}else{ %>
-			현재 배송완료 상태 입니다.
-		<%} %>
-		</td>
-		<td></td>
-		<td align="left">
-			
-		</td>
-	</tr>
-	<%} %>
-	--%>
-	
-	<tr>
-		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
-	</tr>
-	
+
+
 </table>
+
+</div>
+
+
 
 <!-- PageNavigation Start... -->
 <table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top:10px;">
@@ -195,7 +143,7 @@ Search search = (Search)request.getAttribute("search");
 	<% } %>
 	 /////////////////////// EL / JSTL 적용으로 주석 처리 //////////////////////// --%>
 	
-		<jsp:include page="../common/pageNavigator.jsp" />	
+		<jsp:include page="../common/pageNavigator_new.jsp" />	
 			
     	</td>
 	</tr>
@@ -203,7 +151,7 @@ Search search = (Search)request.getAttribute("search");
 <!-- PageNavigation End... -->
 
 </form>
-</div>
+
 
 </body>
 </html>

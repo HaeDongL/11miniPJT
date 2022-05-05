@@ -66,13 +66,17 @@
 		});
 		
 	</script>		
-	
+		<style>
+	    	body {
+	            padding-top : 50px;
+	        }
+    	</style>
 </head>
 
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
+	<div class="navbar  navbar-inverse navbar-fixed-top">
         <div class="container">
         	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
    		</div>

@@ -155,7 +155,7 @@
 		 	}); 	
 		 	
 		 	$("a:contains('구매요청조회')").on("click",function(){
-		 		$(self.location).attr("href","/purchase/requestPurchaseList?menu=${menu}");
+		 		$(self.location).attr("href","/purchase/requestPurchaseList?menu=manage");
 		 	});
 		 	
 		 	/////////////////장바구니////////////////////////////////

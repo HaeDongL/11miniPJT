@@ -40,9 +40,12 @@
 <body>
 <jsp:include page="/layout/toolbar.jsp" />
 
-다음과 같이 구매가 되었습니다.
+<div class="page-header text-info">
+	       <h3>다음과 같이 구매가 되었습니다.</h3>
+</div>
 
-<table border=1>
+
+<table class="table table-bordered">
 	<tr>
 		<td>물품번호</td>
 		<td>${purchase.purchaseProd.prodNo }</td>

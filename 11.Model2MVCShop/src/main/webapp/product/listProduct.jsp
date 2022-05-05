@@ -55,7 +55,7 @@
 		$(function() {
 			
 			
-			$( "td:contains('검색')" ).on("click" , function() {
+			$( ".btn.btn-default:contains('검색')" ).on("click" , function() {
 				
 				fncGetList(1);
 			});
@@ -66,8 +66,8 @@
 			});
 			
 			
-			$(".ct_list_pop h4[name=view]").on("click",function(){
-				var prodNo = $(this).data("value");
+			$(".btn-default:contains('간략정보')").on("click",function(){
+				var prodNo = $(this).data("parm");
 				$.ajax({
 							
 							url:"/product/json/getProduct?prodNo="+prodNo, //RestController 생성
@@ -81,18 +81,39 @@
 							
 							success:function(JSONData,status){
 								var displayValue = 
-												"<h3>"+"상품이름 : "+JSONData.prodName+"</h3>"
-												+"<h3>"+"상품정보 : "+JSONData.prodDetail+"</h3>"
-												+"<h3>"+"상품가격 : "+JSONData.price+"</h3>";
+												"<h5>"+"상품이름 : "+JSONData.prodName+"</h5>"
+												+"<h5>"+"상품정보 : "+JSONData.prodDetail+"</h5>"
+												+"<h5>"+"상품가격 : "+JSONData.price+"</h5>"
+												+"<h5>"+"남은재고 : "+JSONData.quantity+" 개</h5>"
+												if(JSONData.quantity!=0){
+													displayValue = displayValue+"<h5>판매중</h5>";
+												}else{
+													displayValue = displayValue+"<h5>재고없음</h5>";
+												}
+												displayValue = displayValue +
+												"<a href=\"#\" id =\"cancelSummary\" class=\"btn btn-primary\" role=\"button\">그만보기</a>";
 													
-								$("h3").remove();
-								$("td#"+prodNo+"").html(displayValue).css("text-align","center");
+								$("h5").remove();
+								$("a#cancelSummary").remove();
+								$("p#"+prodNo+"").html(displayValue).css("text-align","center");
+								
+								
+							
+								$("a#cancelSummary").on("click",function(){
+									$("h5").remove();
+									$("a#cancelSummary").remove();
+								});
+								
 							}
 						
 				
 				});
 				
 			});
+			
+			
+			
+			
 			
 			// , 가 없으면 자식(?)태그
 			// .ct_list_pop<tr> 의 자식인 td를 의미.
@@ -101,7 +122,10 @@
 			$(".ct_list_b h7").css("color","red");
 			
 			
-			
+			$("a.btn.btn-primary:contains('상세정보')").on("click",function(){
+				var prodNo = $(this).data("param");
+				$(self.location).attr("href","/product/getProduct?prodNo="+prodNo+"&menu=${menu}");
+			});
 		});
 		
 </script>
@@ -115,151 +139,82 @@
 
 <body bgcolor="#ffffff" text="#000000">
 
+<div class="container">
+
 <div style="width:98%; margin-left:10px;">
 
 
 <form name="detailForm">
 <input type="hidden" name="menu" value="${menu }" />
-<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
-	<tr>
-		<td width="15" height="37">
-			<img src="/images/ct_ttl_img01.gif" width="15" height="37"/>
-		</td>
-		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left:10px;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-				<c:if test="${menu == 'manage'}">
-					<td width="93%" class="ct_ttl01">상품 관리</td>
+	
+		<div class="page-header text-info">
+	       <c:if test="${menu == 'manage'}">
+					<h3>상품 관리</h3>
 				</c:if>
 				<c:if test="${menu == 'search'}">
-					<td width="93%" class="ct_ttl01">상품 목록조회</td>
+					<h3>상품 목록조회</h3>
 				</c:if>
-				</tr>
-			</table>
-		</td>
-		<td width="12" height="37">
-			<img src="/images/ct_ttl_img03.gif" width="12" height="37">
-		</td>
-	</tr>
-</table>
+	    </div>
+	    
+	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
+	    <div class="row">
+	    
+		    <div class="col-md-6 text-left">
+		    	<p class="text-primary">
+		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    	</p>
+		    </div>
+		    
+		    <div class="col-md-6 text-right">
+			    
+			    
+				  <div class="form-group">
+				    <select class="form-control" name="searchCondition" >
+						<option value="0" ${search.searchCondition == "0" ? "selected" : "" }>상품번호</option>
+						<option value="1" ${search.searchCondition == "1" ? "selected" : ""}>상품명</option>
+						<option value="2" ${search.searchCondition == "2" ? "selected" : ""}>상품가격</option></select>
+				 </div>
+				  
+				  <div class="form-group">
+				    <label class="sr-only" for="searchKeyword">검색어</label>
+				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어"
+				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+				  </div>
+				  
+				  <button type="button" class="btn btn-default">검색</button>
+				  
+				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+				  
+				
+	    	</div>
+	    	
+		</div>
+	</form>
+	
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-	<tr>
-		<td align="right">
-			<select name="searchCondition" class="ct_input_g" style="width:80px">
-				<option value="0" ${search.searchCondition == "0" ? "selected" : "" }>상품번호</option>
-				<option value="1" ${search.searchCondition == "1" ? "selected" : ""}>상품명</option>
-				<option value="2" ${search.searchCondition == "2" ? "selected" : ""}>상품가격</option>
-			</select><%-- 어떤조건으로 검색하던 그 조건이 검색이후에도 남아있음. --%>
-			<input 	type="text" name="searchKeyword" value="${search.searchKeyword }"  class="ct_input_g" 
-							style="width:200px; height:20px" > <%-- 검색조건을 유지시켜주면 바끼지않음. --%>
-		</td>
-		<td align="right" width="70">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						검색
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-	<tr>
-		<td colspan="11" >
-			전체  ${resultPage.totalCount} 건수,	현재 ${resultPage.currentPage} 페이지
-		</td>
-	</tr>
-	<tr>
-		<td class="ct_list_b" width="100">No</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">상품명<br/>
-		<h7>(상품명 click:상세정보)</h7></td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">가격</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">등록일</td>	
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">현재상태</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">남은 수량</td>
-		<td class="ct_line02"></td>
-		<td class="ct_list_b">간략 정보 보기</td>
-		<td class="ct_line02"></td>
-	</tr>
-	<tr>
-		<td colspan="11" bgcolor="808285" height="1"></td>
-	</tr>
+
+
 	<c:set var="i" value="0" /><%--pageScope.setAttribute("i",0); --%>
 	<c:forEach var="product" items="${list}"><%--Start forEach --%>
 		
+			  <div class="col-sm-6 col-md-4">
+			    <div class="thumbnail">
+			      <img src="/images/uploadFiles/${product.fileName }" style="width:200; height:200px;"   />
+			      <div class="caption">
+			        <h3>${product.prodName }</h3>
+			        <p><a href="#" class="btn btn-primary" role="button" data-param="${product.prodNo }">상세정보</a> <a href="#" class="btn btn-default" role="button" data-parm="${product.prodNo }">간략정보</a></p>
+			      	<p id="${product.prodNo }"></p>
+			      </div>
+			    </div>
+			  </div>
+		
 		<c:set var="i" value="${ i+1 }" /><%--~Scoep.i+1 현재 i에 0 저장 for문이 돌때마다 1식증가--%>
-		<!-- 
-		<script>
-		$(function(){
-			$(".ct_list_pop:contains('${product.prodName}')").on("click",function(){
-				self.location = "/product/getProduct?prodNo=${product.prodNo}&menu=${menu}";
-			});
-		});
-		</script>
-		 -->
-	<tr class="ct_list_pop">
-		<td align="center">${i}</td>
-		<td></td>
-		<td align="left">
-			<c:if test="${menu == 'manage' }">
-				<a href="#"><h4 class="prodNo"  data-value = "${product.prodNo }">${product.prodName }</h4></a>
-			</c:if>
-			<c:if test="${menu == 'search' }">
-				<a href="#"><h4 class="prodNo"  data-value = "${product.prodNo }">${product.prodName }</h4></a>
-			</c:if>
-		</td>
-		<td></td>
-		<td align="left">${product.price }</td>
-		<td></td>
-		<td align="left">${product.regDate}</td>
-		<td></td>
 		
-		<c:if test = "${menu == 'manage'}">
-			<c:if test="${product.quantity != 0 }">
-				<td align="left">판매중</td>
-			</c:if>
-			<c:if test="${product.quantity == 0 }">
-				<td align="left">재고없음</td>
-			</c:if>
-		</c:if>
-		
-		<c:if test = "${menu == 'search'}">
-			
-			<c:if test="${product.quantity != 0 }">
-				<td align="left">판매중</td>
-			</c:if>
-			<c:if test="${product.quantity == 0 }">
-				<td align="left">재고없음</td>
-			</c:if>
-		</c:if>
-			
-		<td></td>
-		<td align="left">${product.quantity}</td>
-		
-		<td></td>
-		<td align="left"><a href="#"><h4 name="view" data-value="${product.prodNo }">간략 정보 보기</h4></a></td>
-		
-	</tr>
-	<tr><td id="${product.prodNo }" colspan="11"></td></tr>
-	<tr>
-		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
-	</tr>
+	
 	</c:forEach><%--End forEach --%>
-</table>
+
 
 <!-- PageNavigation Start... -->
 <table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top:10px;">
@@ -284,15 +239,18 @@
 	<% } %>
 	 /////////////////////// EL / JSTL 적용으로 주석 처리 //////////////////////// --%>
 	
-		<jsp:include page="../common/pageNavigator.jsp" />
+		<jsp:include page="../common/pageNavigator_new.jsp"/>
 			
     	</td>
 	</tr>
 </table>
 <!-- PageNavigation End... -->
 
-</form>
+
+</div>
 </div>
 
 </body>
+
 </html>
+
