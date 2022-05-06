@@ -91,7 +91,22 @@
 				
 			$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
 		}
-	
+		
+		
+		$(function(){
+			$("#password2").on("keyup",function(){
+				var password1 = $("input#password").val();
+				if($(this).val() != password1){
+					display = "<h6>입력하신 비밀번호와 일치하지 않습니다.</h6>";
+					$("#checkDuplpasswd h6").remove();
+					$("#checkDuplpasswd").html(display);
+				}else{
+					display = "<h6>입력하신 비밀번호와 일치합니다.</h6>";
+					$("#checkDuplpasswd h6").remove();
+					$("#checkDuplpasswd").html(display);
+				}
+			});
+		});
 	</script>
 	
 </head>
@@ -134,6 +149,9 @@
 		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
 		    <div class="col-sm-4">
 		      <input type="password" class="form-control" id="password2" name="password2" placeholder="변경비밀번호 확인">
+		    	<span id="helpBlock" class="help-block">
+		      	<strong class="text-danger" id="checkDuplpasswd"></strong>
+		      </span>
 		    </div>
 		  </div>
 		  
