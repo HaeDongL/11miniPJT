@@ -39,6 +39,10 @@
 				self.location = "/user/login"
 			});
 			
+			$(".nav.navbar-nav a:contains('상품목록')").on("click",function(){
+				$(self.location).attr("href","/product/listProduct?menu=search");
+			});
+			
 		});
 		
 	</script>	
@@ -63,6 +67,10 @@
 			<!-- toolBar Button End //////////////////////// -->
 			
 			<div class="collapse navbar-collapse"  id="target">
+				<ul class="nav navbar-nav">
+					<li><a href="#">상품목록</a></li>
+				</ul>
+			
 	             <ul class="nav navbar-nav navbar-right">
 	                 <li><a href="#">회원가입</a></li>
 	                 <li><a href="#">로 그 인</a></li>

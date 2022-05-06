@@ -39,7 +39,7 @@
 
 
 
-<jsp:include page="/layout/toolbar.jsp" />
+
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
@@ -137,8 +137,15 @@
    	</style>
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
 
+
+<body bgcolor="#ffffff" text="#000000">
+		<c:if test="${!empty user }" >
+		<jsp:include page="/layout/toolbar.jsp" />
+		</c:if> 
+		<c:if test="${empty user }" >
+		<jsp:include page="/layout/beforeLoginToolbar.jsp" />
+		</c:if> 
 <div class="container">
 
 <div style="width:98%; margin-left:10px;">

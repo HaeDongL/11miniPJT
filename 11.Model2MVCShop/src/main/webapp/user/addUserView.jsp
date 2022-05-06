@@ -192,6 +192,9 @@
 			});
 			
 			
+			$("#cancel").on("click",function(){
+				window.history.back();
+			});
 		});	
 
 	</script>		
@@ -205,11 +208,7 @@
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-inverse navbar-fixed-top">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
+	<jsp:include page="/layout/beforeLoginToolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
@@ -303,7 +302,7 @@
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >가 &nbsp;입</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
+			  <a class="btn btn-primary btn" href="#" id="cancel" role="button">취&nbsp;소</a>
 		    </div>
 		  </div>
 		</form>

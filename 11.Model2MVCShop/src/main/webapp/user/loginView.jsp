@@ -76,11 +76,7 @@
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-inverse navbar-fixed-top">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
+	<jsp:include page="/layout/beforeLoginToolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->	
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
