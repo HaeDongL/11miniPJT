@@ -30,6 +30,9 @@
             padding-top : 70px;
         }
         
+        h2#time{
+        	color:red;
+        }
    	</style>
    	
    	<script type="text/javascript">
@@ -120,14 +123,19 @@
 
 	<!-- 참조 : http://getbootstrap.com/css/   : container part..... -->
 	<div class="container">
-        <h3>나폴레옹은 이렇게 말했다.</h3>
-        <p>"오늘 나의 불행은 언젠가 내가 잘못 보낸 시간의 보복이다."</p>
-  	 	<h3>"... 장벽은 절실하게 원하지 않는 사람들을 걸러내려고 존재합니다. 장벽은. 당신이 아니라 '다른' 사람들을 멈추게 하려고 거기 있는 것이지요."</h3>
-         <h3>혜광스님</h3>
-         <p>행복한 삶의 비결은.</p>
-         <p>좋아하는 일을 하는 것이 아리라,</p>
-         <p>지금 하는 일을 좋아하는 것입니다.</p>
-         <p>로그인 전후 확인용.</p>
+        <h3>가장 기억에 남는 오류</h3>
+         <p>Bean named 'purchaseDaoImpl' is expected to be of type </p>
+         <p>'com.model2.mvc.service.purchase.impl.PurchaseDaoImpl' </p>
+         <p>but was actually of type 'com.sun.proxy.$Proxy27'</p>
+         <br/>
+         <p>위의 오류는 TargetObject와 advice가 Weaving될때 생성되었던 DynamicProxy의</p>
+         <p>데이터 타입이 TargetObject의 데이터 타입이 아니여서 생긴 오류였다.</p>
+         <p>나는 purchaseDaoImpl를 인젝션 받기위해 데이터 타입을 purchaseDaoImpl로 두고 있었다.</p>
+         <p>하지만 DynamicProxy가 만들어질때 TargetObject가 어떤 interface의 구현체라면...</p>
+         <p>TargetObject의 데이터 타입이 아닌 Interface타입으로 생성이 된다고 한다.</p>
+         <p>따라서 이 오류는 구현체 데이터 타입에 Interface타입을 인젝션하고 있어서 생긴오류였다.</p>
+         <h2 id="time">이 오류로 인해 소모한 시간 : 약 4시간...</h2>
+         
   	 </div>
 	
 	

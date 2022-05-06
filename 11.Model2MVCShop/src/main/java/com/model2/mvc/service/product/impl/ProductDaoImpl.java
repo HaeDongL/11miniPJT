@@ -59,6 +59,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public void updateProduct(Product product) throws Exception {
+		product.setManuDate(product.getManuDate().replace("-", ""));
 		int i = sqlSession.update("ProductMapper.updateProduct",product);
 		sqlSession.update("ProductMapper.updateStock",product);
 		System.out.println("1이나오면 업데이트 완료 :"+i);
