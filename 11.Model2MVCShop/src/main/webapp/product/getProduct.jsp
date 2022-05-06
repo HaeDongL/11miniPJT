@@ -44,7 +44,6 @@
 		$("a#basket:contains('장바구니에 담기')").on("click",function(){
 			
 			var user = $(this).data("param");
-			alert(user);
 			if(user == ''){
 				alert("로그인 후 이용해 주세요.");
 				$(self.location).attr("href","/user/login");
@@ -78,8 +77,9 @@
    		});
 		
 		$("button.btn.btn-primary:contains('구매')").on("click",function(){
-			var user = $(this).data("param");
-			alert(user);
+			
+			var user = $("a#basket").data("param");
+			
 			if(user == ''){
 				alert("로그인 후 이용해 주세요.");
 				$(self.location).attr("href","/user/login");
